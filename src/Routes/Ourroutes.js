@@ -8,8 +8,7 @@ const Ourroutes = () => {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<HomePage/>}/>
-          <Route exact path="singleListing/:mlsNumber" element={<SingleListing />}
-        />
+          <Route exact path="singleListing/:mlsNumber" element={<SingleListing/>}/>
         </Routes>
       </BrowserRouter>
       );
