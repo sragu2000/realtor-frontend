@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 
 function HomePage() {
   const[listings,setListings]=useState([]);
+
   useEffect(()=>{
+
       fetch('http://localhost:8000/api/allListings',{
       method:'GET',
       mode: 'cors',
@@ -12,11 +14,13 @@ function HomePage() {
       .then(data => {
         setListings(data['listings']);
         }).catch(err => console.error(err));
+
     },[]);
+
     return (<>
     {
       listings.map((item)=>{
-        return <ListingGrid 
+        return (<ListingGrid 
           key={item.mlsnumber}
           mlsnumber={item.mlsnumber} 
           price={item.price}
@@ -25,7 +29,7 @@ function HomePage() {
           longitude={item.longitude} 
           bedrooms={item.bedrooms} 
           washrooms={item.washrooms}
-          />;
+          />);
         })
       }
       </>);

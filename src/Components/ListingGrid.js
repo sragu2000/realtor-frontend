@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 function ListingGrid(props) { //props is an object as a parameter
     return (
         <div className="card border-dark" style={{margin:'1%'}}>
@@ -11,6 +11,9 @@ function ListingGrid(props) { //props is an object as a parameter
                     <li>Bedrooms: {props.bedrooms}</li>
                     <li>Washrooms: {props.washrooms}</li>
                 </ul>
+            </div>
+            <div className="card-footer" align="center">
+                <Link to={"singleListing/"+props.mlsnumber}>View Property</Link>
             </div>
         </div>
     );
