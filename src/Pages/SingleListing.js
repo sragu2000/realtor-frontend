@@ -7,7 +7,7 @@ function SingleListing() {
   useEffect(()=>{
     fetch("URL/"+mlsNumber,{method:'GET',mode: 'cors',cache: 'no-cache'})
     .then(response => {
-        if (response.status == 200) {return response.json();}
+        if (response.status === 200) {return response.json();}
         else {console.log('Backend Error..!');console.log(response.text());}
     })
     .then(data => {
