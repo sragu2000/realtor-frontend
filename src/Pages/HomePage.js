@@ -5,7 +5,6 @@ function HomePage() {
   const [listings, setListings] = useState([]);
 
   useEffect(() => {
-
     fetch('http://localhost:8000/api/allListings', {
       method: 'GET',
       mode: 'cors',
@@ -13,9 +12,8 @@ function HomePage() {
     })
       .then(res => { return res.json(); })
       .then(data => {
-        setListings(data['listings']);
+        setListings(data.listings);
       }).catch(err => console.error(err));
-
   }, []);
 
   return (
@@ -23,16 +21,18 @@ function HomePage() {
       <div class="row row-cols-1 row-cols-md-4 g-4">
         {
           listings.map((item) => {
-            return (<ListingGrid
-              key={item.mlsnumber}
-              mlsnumber={item.mlsnumber}
-              price={item.price}
-              address={item.address}
-              latitude={item.latitude}
-              longitude={item.longitude}
-              bedrooms={item.bedrooms}
-              washrooms={item.washrooms}
-            />);
+            return (
+              <ListingGrid
+                key={item.mlsnumber}
+                mlsnumber={item.mlsnumber}
+                price={item.price}
+                address={item.address}
+                latitude={item.latitude}
+                longitude={item.longitude}
+                bedrooms={item.bedrooms}
+                washrooms={item.washrooms}
+              />
+            );
           })
         }
       </div>

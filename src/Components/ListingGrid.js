@@ -39,56 +39,6 @@ function ListingGrid(props) { //props is an object as a parameter
                         <div className="col-md-10">{props.price}</div>
                     </div>
 
-
-                    {/* Design 2 */}
-                    {/* <table class="table table-hover table-bordered">
-                        <tbody>
-                            <tr className="table-success">
-                                <td scope="row"><i class="fa-solid fa-map-location-dot"></i> &nbsp; Address</td>
-                                <td>
-                                    <a href={"https://www.google.com/maps/search/?api=1&query=" + props.latitude + "%2C" + props.longitude} target="_blank">{props.address}</a>
-                                </td>
-                            </tr>
-                            <tr className="table-info">
-                                <td scope="row"><i class="fa-solid fa-bed"></i> &nbsp; Bed Rooms</td>
-                                <td>{props.bedrooms + " Rooms"}</td>
-                            </tr>
-                            <tr className="table-success">
-                                <td scope="row"><i class="fa-solid fa-bath"> &nbsp; </i>Wash Rooms</td>
-                                <td>{props.washrooms + " Rooms"}</td>
-                            </tr>
-                            <tr className="table-info">
-                                <td scope="row"><i class="fa-solid fa-dollar-sign"></i>&nbsp;Price</td>
-                                <td>{props.price}</td>
-                            </tr>
-                        </tbody>
-                    </table> */}
-
-                    {/* Design 3 */}
-                    {/* <div className="row">
-                        <div className="col-md-5">
-                            <i class="fa-solid fa-map-location-dot"></i> &nbsp;Address&nbsp;:
-                        </div>
-                        <div className="col-md-7">
-                            <a href={"https://www.google.com/maps/search/?api=1&query=" + props.latitude + "%2C" + props.longitude} target="_blank">{props.address}</a>
-                        </div>
-                    </div>
-                    
-                    
-                    <p></p>
-                
-                    <i class="fa-solid fa-bed"></i> &nbsp; Bed Rooms&nbsp;:&nbsp;
-                    {props.bedrooms + " Rooms"}
-                    <p></p>
-                
-                    <i class="fa-solid fa-bath"> &nbsp; </i>Wash Rooms&nbsp;:&nbsp;
-                    {props.washrooms + " Rooms"}
-                    <p></p>
-                
-                    <i class="fa-solid fa-dollar-sign"></i>&nbsp;Price&nbsp;:&nbsp;
-                    {props.price} */}
-                    {/* Design 3 end*/}
-
                 </div>
                 <div className="card-footer">
                     <div className="row">
@@ -99,10 +49,12 @@ function ListingGrid(props) { //props is an object as a parameter
                             </a>
                         </div>
                         <div className="col">
-                            <a href="#" className="btn btn-outline-success form-control">
-                                <i className="fa-solid fa-magnifying-glass-location"></i>&nbsp;
-                                Show
-                            </a>
+                            <Link  to={}>
+                                <div className="btn btn-outline-success form-control" >
+                                    <i className="fa-solid fa-magnifying-glass-location"></i>&nbsp;
+                                    Show
+                                </div>
+                            </Link>
                         </div>
                     </div>
                 </div>
