@@ -1,26 +1,35 @@
-
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import $ from 'jquery';
+import GenerateMap from "../Components/GenerateMap";
 import sampleMap from "../Images/map.png";
 import NavBar from "./NavBar";
+
 function SingleListing() {
-  // localStorage.setItem("likes","");
   const { mlsNumber } = useParams();
   const [jsonData, setJsonData] = useState({});
-
+  const viewMap=()=>{
+    return(
+      <GenerateMap
+      text="Hello"
+      latitude={jsonData.latitude}
+      longitude={jsonData.longitude}
+    ></GenerateMap> 
+    );
+  }
   useEffect(() => {
     fetch("http://localhost:8000/api/singleListing?mlsNumber=" + mlsNumber, { method: 'GET', mode: 'cors', cache: 'no-cache' })
       .then(response => {
-        if (response.status == 200) { return response.json(); }
+        if (response.status === 200) { return response.json(); }
         else { console.log('Backend Error..!'); console.log(response.text()); }
       })
       .then(data => {
         setJsonData(data);
       })
       .catch(() => { console.log("Network connection error"); });
-  }, [])
-  const url = "https://www.google.com/maps/search/?api=1&query=" + jsonData.latitude + "%2C" + jsonData.longitude;
+
+    
+  }, []);
+
   return (
     <React.Fragment>
       <NavBar></NavBar>
@@ -30,9 +39,10 @@ function SingleListing() {
             <div className="row align-items-center">
               <div className="col-md-8 fw-bolder">
                 {"MLS Number : " + jsonData.mlsnumber}
+                
               </div>
               <div className="col-md-4 mt-2">
-                <Link to="/"><div className="btn btn-primary form-control">Home</div></Link>
+                <Link to="/home"><div className="btn btn-primary form-control">Home</div></Link>
               </div>
             </div>
 
@@ -73,7 +83,7 @@ function SingleListing() {
                     <tbody>
                       <tr>
                         <th scope="row">Address</th>
-                        <td><a href={"https://www.google.com/maps/search/?api=1&query=" + jsonData.latitude + "%2C" + jsonData.longitude} target="_blank">{jsonData.address}</a></td>
+                        <td><a href={"https://www.google.com/maps/search/?api=1&query=" + jsonData.latitude + "%2C" + jsonData.longitude}>{jsonData.address}</a></td>
                       </tr>
                       <tr>
                         <th scope="row">Bedrooms</th>
@@ -89,15 +99,22 @@ function SingleListing() {
                       </tr>
                     </tbody>
                   </table>
-                  <div style={{ "overflow": "auto", "height": "40vh" }}><img src={sampleMap} className="d-block" alt="..." /></div>
+                  <div style={{ "overflow": "auto", "height": "40vh" }}>
+                  {viewMap()}
+                  </div>
                   <div className="btn btn-warning form-control mt-2" >Request</div>
                   {/* <button onClick={
                     ()=>{
                       var text=localStorage.getItem("likes");
                       localStorage.setItem("likes",text+","+jsonData.mlsnumber);
                       console.log(jsonData.mlsnumber)}
-                    } className="btn btn-danger form-control mt-2" >Add to Favourites</button> */}
-                  <div className="btn btn-success form-control mt-2" >Share</div>
+                    } className="btn btn-danger form-control mt-2" >Add to Favourites</button> */
+                  }
+
+                  <a className="btn btn-success form-control mt-2" href={"https://wa.me/?text=" + window.location.href}>Share</a>
+                  <Link to={"/inquiry/" + jsonData.mlsnumber}>
+                    <button className="btn btn-primary form-control mt-2" >Enquiry</button>
+                  </Link>
 
                 </div>
               </div>
