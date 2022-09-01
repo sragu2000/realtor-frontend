@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import GenerateMap from "../Components/GenerateMap";
 import sampleMap from "../Images/map.png";
 import NavBar from "./NavBar";
-
+import { useNavigate } from 'react-router-dom';
+import MapV2 from "../Components/MapV2";
+import Spinner from 'react-bootstrap/Spinner';
 function SingleListing() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("realtorSuit") === null) {
+      navigate("/login");
+    }
+  }, []);
+  // localStorage.setItem("likes","");
   const { mlsNumber } = useParams();
   const [jsonData, setJsonData] = useState({});
-  const viewMap=()=>{
-    return(
-      <GenerateMap
-      text="Hello"
-      latitude={jsonData.latitude}
-      longitude={jsonData.longitude}
-    ></GenerateMap> 
-    );
-  }
+
   useEffect(() => {
     fetch("http://localhost:8000/api/singleListing?mlsNumber=" + mlsNumber, { method: 'GET', mode: 'cors', cache: 'no-cache' })
       .then(response => {
@@ -26,10 +26,7 @@ function SingleListing() {
         setJsonData(data);
       })
       .catch(() => { console.log("Network connection error"); });
-
-    
   }, []);
-
   return (
     <React.Fragment>
       <NavBar></NavBar>
@@ -39,7 +36,6 @@ function SingleListing() {
             <div className="row align-items-center">
               <div className="col-md-8 fw-bolder">
                 {"MLS Number : " + jsonData.mlsnumber}
-                
               </div>
               <div className="col-md-4 mt-2">
                 <Link to="/home"><div className="btn btn-primary form-control">Home</div></Link>
@@ -100,7 +96,15 @@ function SingleListing() {
                     </tbody>
                   </table>
                   <div style={{ "overflow": "auto", "height": "40vh" }}>
-                  {viewMap()}
+                    {
+                      (jsonData.latitude) ? <MapV2
+                        latitude={jsonData.latitude}
+                        longitude={jsonData.longitude}
+                        text={jsonData.address}
+                      ></MapV2>
+                        :
+                        <center><Spinner animation="grow" /></center>
+                    }
                   </div>
                   <div className="btn btn-warning form-control mt-2" >Request</div>
                   {/* <button onClick={

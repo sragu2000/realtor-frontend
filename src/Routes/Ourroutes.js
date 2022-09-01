@@ -6,6 +6,8 @@ import Signup from '../Pages/Signup.js'
 import InquiryProperty from "../Pages/InquiryProperty.js";
 import UserEnquiries from "../Pages/UserEnquiries.js";
 import PropertiesMap from "../Pages/PropertiesMap.js";
+import Map from "../Components/Map.js";
+import MapView from "../Pages/MapView.js";
 
 const Ourroutes = () => {
 
@@ -20,6 +22,9 @@ const Ourroutes = () => {
           <Route exact path="/userEnquiries" element={<UserEnquiries/>}/>
           <Route exact path="/inquiry/:mlsNumber" element={<InquiryProperty/>}/>
           <Route exact path="/propertiesMap" element={<PropertiesMap/>}/>
+          <Route exact path="/singleMap/:latitude/:longitude/:text" element={<Map/>}/>
+          <Route exact path="/mapview" element={<MapView></MapView>}/>
+
 
         </Routes>
       </BrowserRouter>
