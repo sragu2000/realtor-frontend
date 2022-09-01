@@ -16,7 +16,7 @@ function MapView() {
     const fetchFunction = async () => {
         try {
             await axios
-                .get('http://localhost:8000/api/allListings')
+                .get('https://realtorsuit.artsuit.ca/public/api/allListings')
                 .then(res => {
                     setListings(res.data['listings']);
                 });

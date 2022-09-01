@@ -18,7 +18,7 @@ function HomePage() {
   const fetchFunction = async () => {
     try {
       await axios
-        .get('http://localhost:8000/api/allListings')
+        .get('https://realtorsuit.artsuit.ca/public/api/allListings')
         .then(res => {
           setListings(res.data['listings']);
         });
@@ -29,7 +29,7 @@ function HomePage() {
   }
   useEffect(() => {
     fetchFunction();
-    // fetch('http://localhost:8000/api/allListings', {
+    // fetch('https://realtorsuit.artsuit.ca/public/api/allListings', {
     //   method: 'GET',
     //   mode: 'cors',
     //   cache: 'no-cache'

@@ -7,7 +7,7 @@ function UserEnquiries() {
     let realtorSuit = JSON.parse(localStorage.getItem("realtorSuit"));
     var loggedInUserName = realtorSuit['userName'];
     useEffect(() => {
-        fetch("http://localhost:8000/api/allInquiriesOfClient?loggedInUserName=" + loggedInUserName, {
+        fetch("https://realtorsuit.artsuit.ca/public/api/allInquiriesOfClient?loggedInUserName=" + loggedInUserName, {
             method: 'GET',
             mode: 'cors',
             cache: 'no-cache'

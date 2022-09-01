@@ -17,7 +17,7 @@ function SingleListing() {
   const [jsonData, setJsonData] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/singleListing?mlsNumber=" + mlsNumber, { method: 'GET', mode: 'cors', cache: 'no-cache' })
+    fetch("https://realtorsuit.artsuit.ca/public/api/singleListing?mlsNumber=" + mlsNumber, { method: 'GET', mode: 'cors', cache: 'no-cache' })
       .then(response => {
         if (response.status === 200) { return response.json(); }
         else { console.log('Backend Error..!'); console.log(response.text()); }
