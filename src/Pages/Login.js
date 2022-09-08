@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 function LoginPage() {
   const navigate = useNavigate();
-  
   useEffect(() => {
     if(localStorage.getItem("realtorSuit")!==null){
       navigate("/home");
@@ -21,7 +20,7 @@ function LoginPage() {
     toServer.append("passWord", password);
     toServer.append("userType", userType);
 
-    fetch("https://realtorsuit.artsuit.ca/public/api/login", {
+    fetch("http://localhost:8000/api/login", {
       method: "POST",
       body: toServer,
       mode: "cors",
@@ -40,7 +39,8 @@ function LoginPage() {
         if (data.result) {
           var realtorSuit = { "userName": email, "userType": userType };
           localStorage.setItem("realtorSuit", JSON.stringify(realtorSuit));
-          navigate("/home");
+          window.location.href="/home"
+          //navigate("/home");
         }
       })
       .catch((e) => {

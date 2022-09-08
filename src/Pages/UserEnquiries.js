@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
-
+import { Link } from 'react-router-dom';
 function UserEnquiries() {
     const [chats, fillChats] = useState([]);
     let realtorSuit = JSON.parse(localStorage.getItem("realtorSuit"));
     var loggedInUserName = realtorSuit['userName'];
     useEffect(() => {
-        fetch("https://realtorsuit.artsuit.ca/public/api/allInquiriesOfClient?loggedInUserName=" + loggedInUserName, {
+        fetch("http://localhost:8000/api/allInquiriesOfClient?loggedInUserName=" + loggedInUserName, {
             method: 'GET',
             mode: 'cors',
             cache: 'no-cache'

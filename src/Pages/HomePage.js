@@ -3,22 +3,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Spinner from 'react-bootstrap/Spinner';
 import NavBar from "./NavBar";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem("realtorSuit") === null) {
-      navigate("/login");
-    }
-  }, []);
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const fetchFunction = async () => {
     try {
       await axios
-        .get('https://realtorsuit.artsuit.ca/public/api/allListings')
+        .get('http://localhost:8000/api/allListings')
         .then(res => {
           setListings(res.data['listings']);
         });
@@ -29,7 +23,7 @@ function HomePage() {
   }
   useEffect(() => {
     fetchFunction();
-    // fetch('https://realtorsuit.artsuit.ca/public/api/allListings', {
+    // fetch('http://localhost:8000/api/allListings', {
     //   method: 'GET',
     //   mode: 'cors',
     //   cache: 'no-cache'
@@ -38,7 +32,6 @@ function HomePage() {
     //   .then(data => {
     //     setListings(data['listings']);
     //   }).catch(err => console.error(err));
-
   }, []);
 
   return (
@@ -59,7 +52,7 @@ function HomePage() {
           <div className="card-body">
             {
               loading ?
-                <div className="row row-cols-1 row-cols-md-3 g-4">
+                <div className="row row-cols-1 row-cols-md-4 g-4">
                   {
                     listings.map((item) => {
                       return (

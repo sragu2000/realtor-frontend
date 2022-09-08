@@ -8,11 +8,6 @@ import { useNavigate } from 'react-router-dom';
 function InquiryProperty() {
 
   const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem("realtorSuit") === null) {
-      navigate("/login");
-    }
-  }, []);
 
   const { mlsNumber } = useParams();
   const [typedText, placeChat] = useState("");
@@ -23,7 +18,7 @@ function InquiryProperty() {
   var loggedInUserName=realtorSuit['userName'];
 
   useEffect(() => {
-    fetch("https://realtorsuit.artsuit.ca/public/api/inquiryChat?mlsNumber=" + mlsNumber + "&clientUserName="+loggedInUserName, {
+    fetch("http://localhost:8000/api/inquiryChat?mlsNumber=" + mlsNumber + "&clientUserName="+loggedInUserName, {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache'
@@ -45,7 +40,7 @@ function InquiryProperty() {
     toServer.append('chatMessage', typedText);
     toServer.append('loggedInUserName', loggedInUserName);
     if (typedText !== null && typedText !== "") {
-      fetch("https://realtorsuit.artsuit.ca/public/api/feedInquiryChatByClient", {
+      fetch("http://localhost:8000/api/feedInquiryChatByClient", {
         method: 'POST',
         body: toServer,
         mode: 'cors',

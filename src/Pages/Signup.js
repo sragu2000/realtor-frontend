@@ -3,12 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 function Signup() {
 
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    if(localStorage.getItem("realtorSuit")!==null){
-      navigate("/home");
-    }
-  }, []);
 
   const [password, setPassword] = useState("");
   const [cnpassword, setCnPassword] = useState("");
@@ -28,7 +22,7 @@ function Signup() {
     toServer.append("passWord", password);
     toServer.append("mobileNumber", phone);
 
-    fetch("https://realtorsuit.artsuit.ca/public/api/signup", {
+    fetch("http://localhost:8000/api/signup", {
       method: "POST",
       body: toServer,
       mode: "cors",

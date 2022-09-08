@@ -1,13 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faRightFromBracket, faComments, faHome } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faRightFromBracket, faComments, faHome, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
+// import { useState } from "react";
 // import MapV2 from "../Components/MapV2";
 
 function NavBar() {
     const navigate = useNavigate();
     const logoutFunction = () => {
         localStorage.clear();
-        navigate("/login");
+        navigate("/");
+    }
+    // const [favourite, setFavourite]=useState(0);
+    var count=0;
+    var fav={"fav":[]};
+    if(localStorage.getItem("favData")){
+        count=JSON.parse(localStorage.getItem("favData"))["fav"].length;
+    }else{
+        localStorage.setItem("favData",JSON.stringify(fav));
     }
     return (
         <>
@@ -51,8 +60,19 @@ function NavBar() {
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                                 <button className="btn btn-outline-success" type="submit">Search</button>
                         </form> */}
-                        <div className="ml-auto btn btn-outline-danger border-dark"><FontAwesomeIcon icon={faHeart} /></div>
-                        <button onClick={logoutFunction} className="ml-auto btn btn-outline-warning border-dark"><FontAwesomeIcon icon={faRightFromBracket} /></button>
+                        <Link to="/favourites">
+                        <div className="ml-auto btn btn-outline-danger border-dark"><FontAwesomeIcon icon={faHeart} />&nbsp;{count}</div>
+                        </Link>
+                        {
+                            (localStorage.getItem("realtorSuit"))
+                                ?
+                                <button onClick={logoutFunction} className="ml-auto btn btn-outline-warning border-dark"><FontAwesomeIcon icon={faRightFromBracket} /></button>
+                                :
+                                <Link to="/login">
+                                    <div className="ml-auto btn btn-primary border-dark align-items-center"><FontAwesomeIcon icon={faRightToBracket} /> Login</div>
+                                </Link>
+                        }
+
                     </div>
                 </div>
             </nav>
